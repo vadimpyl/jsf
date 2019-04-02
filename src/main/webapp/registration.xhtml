@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+>
+<h:head>
+    <title>Facelet Title</title>
+</h:head>
+<h:body>
+    <h:form>
+
+        <h3>Registration</h3>
+<table>
+    <tr>
+        <td>
+        <h:outputText value="Login" />
+        </td>
+        <td>
+        <h:inputText id="login" value="#{registration.login}"></h:inputText>
+        <h:message for="login"></h:message>
+        </td>
+    </tr>
+    <tr>
+        <td>
+        <h:outputText value="First Name" />
+        </td>
+        <td>
+        <h:inputText id="firstName" value="#{registration.firstName}"></h:inputText>
+        <h:message for="firstName"></h:message>
+        </td>
+    </tr>
+    <tr>
+        <td>
+        <h:outputText value="Last Name" />
+        </td>
+        <td>
+        <h:inputText id="lastName" value="#{registration.lastName}"></h:inputText>
+        <h:message for="lastName"></h:message>
+        </td>
+    </tr>
+    <tr>
+        <td>
+        <h:outputText value="Birth Date" />
+        </td>
+        <td>
+        <h:inputText id="birthDate" value="#{registration.birthDate}">
+            <f:convertDateTime pattern="yyyy-MM-dd" />
+        </h:inputText>
+        <h:message for="birthDate"></h:message>
+        </td>
+    </tr>
+    <tr>
+        <td>
+        <h:outputText value="Birth City" />
+        </td>
+        <td>
+        <h:inputText id="birthCity" value="#{registration.birthCity}"></h:inputText>
+        <h:message for="birthCity"></h:message>
+        </td>
+    </tr>
+    <tr>
+        <td>
+        <h:outputText value="Birth Country" />
+        </td>
+        <td>
+        <h:inputText id="birthCountry" value="#{registration.birthCountry}"></h:inputText>
+        <h:message for="birthCountry"></h:message>
+        </td>
+    </tr>
+    <tr>
+        <td>
+        <h:outputText value="Password" />
+        </td>
+        <td>
+        <h:inputSecret id="password" value="#{registration.password}"></h:inputSecret>
+        <h:message for="password"></h:message>
+        </td>
+    </tr>
+    <tr>
+        <td>
+        <h:outputText value="Confirm Password" />
+        </td>
+        <td>
+        <h:inputSecret id="confirmPassword" value="#{registration.confirmPassword}"></h:inputSecret>
+        <h:message for="confirmPassword"></h:message>
+        </td>
+    </tr>
+
+</table>
+        <h:commandButton action="#{registration.validateRegistration}" value="Register"/>
+    </h:form>
+
+</h:body>
+</html>

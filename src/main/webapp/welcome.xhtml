@@ -1,15 +1,121 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
-
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+>
 <h:head>
-	<title>JSF 2.0 Hello World</title>
+	<title>Facelet Title</title>
 </h:head>
-<h:body bgcolor="white">
-	<h3>JSF 2.0 Hello World Example - welcome.xhtml</h3>
-	<h4>Welcome #{helloBean.name}</h4>
+<h:body>
+	<h:form>
+		<p>Welcome, #{login.userName}! <h:commandLink action="#{login.logout}" value="Logout"></h:commandLink></p>
+
+		<table>
+			<tr>
+				<td>
+					<h:outputText value="From Date" />
+				</td>
+				<td>
+					<h:inputText id="fromDate" value="#{userList.fromDate}">
+						<f:convertDateTime pattern="yyyy-MM-dd" />
+					</h:inputText>
+					<h:message for="fromDate"></h:message>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<h:outputText value="To Date" />
+				</td>
+				<td>
+					<h:inputText id="toDate" value="#{userList.toDate}">
+						<f:convertDateTime pattern="yyyy-MM-dd" />
+					</h:inputText>
+					<h:message for="toDate"></h:message>
+				</td>
+			</tr>
+		</table>
+		<h:commandButton value = "Filter by date"
+						 action = "#{userList.filterUsers}" />
+
+		<h:dataTable value="#{userList.users}" var="u"
+						 styleClass="order-table"
+						 headerClass="order-table-header"
+						 rowClasses="order-table-odd-row,order-table-even-row">
+
+				<h:column>
+					<f:facet name="header">
+						<h:commandLink action="#{userList.sortByLogin}">
+							Login
+						</h:commandLink>
+					</f:facet>
+					#{u.login}
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">First Name</f:facet>
+					<h:inputText value = "#{u.firstName}"
+								 size = "5" rendered = "#{u.canEdit}" />
+					<h:outputText value = "#{u.firstName}"
+								  rendered = "#{not u.canEdit}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Last Name</f:facet>
+					<h:inputText value = "#{u.lastName}"
+								 size = "5" rendered = "#{u.canEdit}" />
+					<h:outputText value = "#{u.lastName}"
+								  rendered = "#{not u.canEdit}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Birth Date</f:facet>
+					<h:inputText value = "#{u.birthDate}"
+								 size = "5" rendered = "#{u.canEdit}" converterMessage="Please provide date of birth in dd/mm/yyyy format" >
+						<f:convertDateTime type="both" timeZone="#{u.timeZone}" pattern="yyyy-MM-dd" />
+					</h:inputText>
+
+					<h:outputText value = "#{u.birthDate}"
+								  rendered = "#{not u.canEdit}" >
+						<f:convertDateTime type="both" timeZone="#{u.timeZone}" pattern="yyyy-MM-dd" />
+
+					</h:outputText>
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Birth City</f:facet>
+					<h:inputText value = "#{u.birthCity}"
+								 size = "5" rendered = "#{u.canEdit}" />
+					<h:outputText value = "#{u.birthCity}"
+								  rendered = "#{not u.canEdit}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Birth Country</f:facet>
+					<h:inputText value = "#{u.birthCountry}"
+								 size = "5" rendered = "#{u.canEdit}" />
+					<h:outputText value = "#{u.birthCountry}"
+								  rendered = "#{not u.canEdit}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name = "header">Edit</f:facet>
+					<h:commandButton value = "Edit"
+									 action = "#{userList.editUser(u)}"
+									 rendered = "#{not u.canEdit}"/>
+				</h:column>
+
+				<h:column>
+					<f:facet name = "header">Delete</f:facet>
+					<h:commandButton value = "Delete"
+									 action = "#{userList.deleteUser(u)}"/>
+				</h:column>
+
+			</h:dataTable>
+		<h:commandButton value = "Save Employees"
+						 action = "#{userList.saveUsers}" />
+	</h:form>
 </h:body>
 </html>

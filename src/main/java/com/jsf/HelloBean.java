@@ -1,4 +1,4 @@
-package com.mkyong.common;
+package com.jsf;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -11,7 +11,7 @@ public class HelloBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private String name;
+	private String name = "Hello World";
 
 	public String getName() {
 		return name;
