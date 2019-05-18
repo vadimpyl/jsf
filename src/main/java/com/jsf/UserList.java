@@ -25,7 +25,6 @@ public class UserList implements Serializable
     }
 
     public String deleteUser(User user) {
-        //UserHelper.listOfUsers().remove(user);
         users.remove(user);
         return null;
     }
